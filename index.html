@@ -8,11 +8,28 @@
 <body>
   <h1>Listy</h1>
   
-  <button onClick="handlers.displayTodos()">Display Todos</button>
-  <button onClick="handlers.toggleAllTodos()">todoToggleAll</button>
+  <button onclick="handlers.toggleAllTodos()">todoToggleAll</button>
   <div>
-    <button onClick="handlers.addTodo()">Add Todo</button>
+    <button onclick="handlers.addTodo()">Add Todo</button>
     <input id="addTodo" type="text" placeholder="Add new todo"/>
+  </div>
+  <div>
+    <button onclick="handlers.changeTodo()">Change Todo</button>
+    <input id="toDoPos" type="number">
+    <input id="toDoText" type="text">
+  </div>
+  <div>
+    <button onclick="handlers.deleteTodo()">Delete Todo</button>
+    <input id="deleteToDoPos" type="number">
+  </div>
+  <div>
+    <button onclick="handlers.toggleTodo()">Complete Todo</button>
+    <input id="toggleToDoPos" type="number">
+  </div>
+  <div>
+    <ul id="toDoList">
+
+    </ul>
   </div>
   
   
