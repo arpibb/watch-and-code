@@ -1,31 +1,23 @@
 const addTodoBox = document.querySelector('#add-todo');
+const deleteButtons = document.querySelector('.deleteButton');
 
 const toDoList = {
   todos: [],
-  displayTodos() {
-    let unOrderedToDoList = document.querySelector('#toDoList')
-    unOrderedToDoList.innerHTML = "";
-    this.todos.map(todo => {
-      let toDoLi = document.createElement('li')
-      toDoLi.textContent = todo.completed ? `(X) ${todo.todoText}` : `( ) ${todo.todoText}`;
-      unOrderedToDoList.appendChild(toDoLi);
-  })
-  },
   addTodo(todoText){
     this.todos.push({todoText, completed: false});
-    this.displayTodos();
+    view.displayTodos();
   },
   changeTodo(idx,newVal){
     this.todos[idx].todoText = newVal;
-    this.displayTodos();
+    view.displayTodos();
   },
   deleteTodo(idx){
     this.todos.splice(idx,1);
-    this.displayTodos();
+    view.displayTodos();
   },
   todoToggleCompleted(idx){
     this.todos[idx].completed = !this.todos[idx].completed;
-    this.displayTodos();
+    view.displayTodos();
   },
   todoToggleAll(){
     let completedCount = 0;
@@ -37,7 +29,7 @@ const toDoList = {
     else{
       this.todos.forEach(todo => todo.completed = true);
     }
-    this.displayTodos();
+    view.displayTodos();
   }
 };
 
@@ -54,10 +46,8 @@ const handlers = {
     changeText.value = "";
     changeTextPos.value = "";
   },
-  deleteTodo(){
-    let deleteTextPos = document.querySelector("#deleteToDoPos");
-    toDoList.deleteTodo(deleteTextPos.valueAsNumber);
-    deleteTextPos.value = "";
+  deleteTodo(idx){
+    toDoList.deleteTodo(idx);
   },
   toggleTodo(){
     let toggleToDoPos = document.querySelector('#toggleToDoPos');
@@ -70,6 +60,30 @@ const handlers = {
 }
 const view = {
   displayTodos(){
-
+    let unOrderedToDoList = document.querySelector('#toDoList')
+    unOrderedToDoList.innerHTML = "";
+    toDoList.todos.map((todo,idx) => {
+      let toDoLi = document.createElement('li');
+      toDoLi.id = idx;
+      toDoLi.textContent = todo.completed ? `(X) ${todo.todoText}` :  `( ) ${todo.todoText}`
+      toDoLi.appendChild(this.createDeleteButton());
+      unOrderedToDoList.appendChild(toDoLi);
+  })
+  },
+  createDeleteButton(){
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.classList.add('delete-button');
+    return deleteButton
+  },
+  setUpEventListeners(){
+    const todosUl = document.querySelector('ul');
+    todosUl.addEventListener('click', (e) => {
+      if(e.target.className === "delete-button"){
+      handlers.deleteTodo(e.target.parentNode.id);
+      }
+    });
   }
 }
+
+view.setUpEventListeners();
