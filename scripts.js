@@ -21,14 +21,9 @@ const toDoList = {
   },
   todoToggleAll(){
     let completedCount = 0;
-    this.todos.forEach(todo => todo.completed ? completedCount +=1 : completedCount);
+    this.todos.forEach(todo => todo.completed ? completedCount += 1 : completedCount);
     //console.log(completedArray)
-    if(this.todos.length === completedCount){
-      this.todos.forEach(todo => todo.completed = false);
-    }
-    else{
-      this.todos.forEach(todo => todo.completed = true);
-    }
+    this.todos.forEach(todo => this.todos.length === completedCount ? todo.completed = false : todo.completed = true);
     view.displayTodos();
   }
 };
@@ -49,9 +44,9 @@ const handlers = {
   deleteTodo(idx){
     toDoList.deleteTodo(idx);
   },
-  toggleTodo(){
+  toggleTodo(idx){
     let toggleToDoPos = document.querySelector('#toggleToDoPos');
-    toDoList.todoToggleCompleted(toggleToDoPos.valueAsNumber);
+    toDoList.todoToggleCompleted(idx);
     toggleToDoPos.value = "";
   },
   toggleAllTodos(){
@@ -65,7 +60,8 @@ const view = {
     toDoList.todos.map((todo,idx) => {
       let toDoLi = document.createElement('li');
       toDoLi.id = idx;
-      toDoLi.textContent = todo.completed ? `(X) ${todo.todoText}` :  `( ) ${todo.todoText}`
+      toDoLi.textContent = todo.completed ? `(X) ${todo.todoText}` :  `( ) ${todo.todoText}`;
+      toDoLi.appendChild(this.createToggleButton());
       toDoLi.appendChild(this.createDeleteButton());
       unOrderedToDoList.appendChild(toDoLi);
   })
@@ -76,11 +72,21 @@ const view = {
     deleteButton.classList.add('delete-button');
     return deleteButton
   },
+  createToggleButton(){
+    const toggleButton = document.createElement('button');
+    toggleButton.textContent = 'Done';
+    toggleButton.classList.add('toggle-button');
+    return toggleButton
+  },
   setUpEventListeners(){
     const todosUl = document.querySelector('ul');
     todosUl.addEventListener('click', (e) => {
       if(e.target.className === "delete-button"){
-      handlers.deleteTodo(e.target.parentNode.id);
+        handlers.deleteTodo(e.target.parentNode.id);
+      }
+      else if(e.target.className === "toggle-button"){
+        handlers.toggleTodo(e.target.parentNode.id);
+
       }
     });
   }
