@@ -22,7 +22,6 @@ const toDoList = {
   todoToggleAll(){
     let completedCount = 0;
     this.todos.forEach(todo => todo.completed ? completedCount += 1 : completedCount);
-    //console.log(completedArray)
     this.todos.forEach(todo => this.todos.length === completedCount ? todo.completed = false : todo.completed = true);
     view.displayTodos();
   }
@@ -45,9 +44,7 @@ const handlers = {
     toDoList.deleteTodo(idx);
   },
   toggleTodo(idx){
-    let toggleToDoPos = document.querySelector('#toggleToDoPos');
     toDoList.todoToggleCompleted(idx);
-    toggleToDoPos.value = "";
   },
   toggleAllTodos(){
     toDoList.todoToggleAll();
@@ -59,9 +56,11 @@ const view = {
     unOrderedToDoList.innerHTML = "";
     toDoList.todos.map((todo,idx) => {
       let toDoLi = document.createElement('li');
+      let toDoSpan = document.createElement('span');
       toDoLi.id = idx;
-      toDoLi.textContent = todo.completed ? `(X) ${todo.todoText}` :  `( ) ${todo.todoText}`;
+      toDoSpan.textContent = todo.completed ? `(X) ${todo.todoText}` :  `( ) ${todo.todoText}`;
       toDoLi.appendChild(this.createToggleButton());
+      toDoLi.appendChild(toDoSpan);
       toDoLi.appendChild(this.createDeleteButton());
       unOrderedToDoList.appendChild(toDoLi);
   })
@@ -80,6 +79,7 @@ const view = {
   },
   setUpEventListeners(){
     const todosUl = document.querySelector('ul');
+    const addTodo = document.querySelector("#addTodo");
     todosUl.addEventListener('click', (e) => {
       if(e.target.className === "delete-button"){
         handlers.deleteTodo(e.target.parentNode.id);
@@ -89,6 +89,12 @@ const view = {
 
       }
     });
+    addTodo.addEventListener('keydown',(e)=>{
+      if(e.code ==='Enter'){
+        handlers.addTodo();
+      }
+    });
+    
   }
 }
 
