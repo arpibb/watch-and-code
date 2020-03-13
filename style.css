@@ -13,3 +13,28 @@
   box-shadow: 1px 5px 40px grey;
   margin-bottom: 1rem;
 }
+#addTodo:focus {
+  outline: 0;
+}
+ul{
+  list-style-type: none;
+  text-align: left;
+}
+.toDoLi{
+  border: none;
+  background-color: white;
+  width: 20rem;
+  height: 3rem;
+  font-size: 2rem;
+}
+.toDoLi-text:focus{
+  outline: 0;
+}
+.toggle-button{
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: .25rem;
+}
+.completed{
+  text-decoration: line-through;
+}

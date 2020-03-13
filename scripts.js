@@ -1,10 +1,12 @@
 const addTodoBox = document.querySelector('#add-todo');
 const deleteButtons = document.querySelector('.deleteButton');
 
+
 const toDoList = {
   todos: [],
   addTodo(todoText){
     this.todos.push({todoText, completed: false});
+    localStorage.setItem('todos',JSON.stringify(this.todos));
     view.displayTodos();
   },
   changeTodo(idx,newVal){
@@ -13,19 +15,24 @@ const toDoList = {
   },
   deleteTodo(idx){
     this.todos.splice(idx,1);
+    localStorage.setItem('todos',JSON.stringify(this.todos));
     view.displayTodos();
   },
   todoToggleCompleted(idx){
     this.todos[idx].completed = !this.todos[idx].completed;
+    localStorage.setItem('todos',JSON.stringify(this.todos));
     view.displayTodos();
   },
   todoToggleAll(){
     let completedCount = 0;
     this.todos.forEach(todo => todo.completed ? completedCount += 1 : completedCount);
     this.todos.forEach(todo => this.todos.length === completedCount ? todo.completed = false : todo.completed = true);
+    localStorage.setItem('todos',JSON.stringify(this.todos));
     view.displayTodos();
   }
 };
+
+
 
 const handlers = {
   addTodo(){
@@ -56,10 +63,20 @@ const view = {
     unOrderedToDoList.innerHTML = "";
     toDoList.todos.map((todo,idx) => {
       let toDoLi = document.createElement('li');
-      let toDoSpan = document.createElement('span');
+      toDoLi.classList.add('toDoLi');
       toDoLi.id = idx;
-      toDoSpan.textContent = todo.completed ? `(X) ${todo.todoText}` :  `( ) ${todo.todoText}`;
-      toDoLi.appendChild(this.createToggleButton());
+
+      let toDoSpan = document.createElement('span');
+      toDoSpan.setAttribute('contenteditable','true')
+      toDoSpan.classList.add('toDoLi-text');
+      toDoSpan.textContent = todo.todoText;
+      
+      let toggleImgSrc = '';
+      //if the todo is completed crossing out the text and switching between icons before the text
+      todo.completed ? toDoSpan.classList.add('completed') : toDoSpan.classList.remove('completed');
+      todo.completed ? toggleImgSrc="assets/icons/icons8-checkmark-48.png" : toggleImgSrc="assets/icons/icons8-circle-50.png";
+
+      toDoLi.appendChild(this.createToggleButton(toggleImgSrc));
       toDoLi.appendChild(toDoSpan);
       toDoLi.appendChild(this.createDeleteButton());
       unOrderedToDoList.appendChild(toDoLi);
@@ -71,9 +88,9 @@ const view = {
     deleteButton.classList.add('delete-button');
     return deleteButton
   },
-  createToggleButton(){
-    const toggleButton = document.createElement('button');
-    toggleButton.textContent = 'Done';
+  createToggleButton(src){
+    const toggleButton = document.createElement('img');
+    toggleButton.setAttribute('src',src)
     toggleButton.classList.add('toggle-button');
     return toggleButton
   },
@@ -86,7 +103,13 @@ const view = {
       }
       else if(e.target.className === "toggle-button"){
         handlers.toggleTodo(e.target.parentNode.id);
-
+      }
+      
+    });
+    todosUl.addEventListener('onchange', (e) => {
+      console.log(e.target.textContent)
+      if(e.target.className === "toDoLi-text"){
+        console.log(e.target.textContent);
       }
     });
     addTodo.addEventListener('keydown',(e)=>{
@@ -97,5 +120,6 @@ const view = {
     
   }
 }
-
+toDoList.todos = JSON.parse(localStorage.getItem('todos')) || [];
 view.setUpEventListeners();
+view.displayTodos();
