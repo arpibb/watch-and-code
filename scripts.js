@@ -63,21 +63,23 @@ const view = {
     unOrderedToDoList.innerHTML = "";
     toDoList.todos.map((todo,idx) => {
       let toDoLi = document.createElement('li');
+      let toDoDiv = document.createElement('div');
+
       toDoLi.classList.add('toDoLi');
       toDoLi.id = idx;
 
-      let toDoSpan = document.createElement('span');
-      toDoSpan.setAttribute('contenteditable','true')
-      toDoSpan.classList.add('toDoLi-text');
-      toDoSpan.textContent = todo.todoText;
+      let toDoLabel = document.createElement('label');
+      toDoLabel.setAttribute('contenteditable','true')
+      toDoLabel.classList.add('toDoLi-text');
+      toDoLabel.textContent = todo.todoText;
       
       let toggleImgSrc = '';
       //if the todo is completed crossing out the text and switching between icons before the text
-      todo.completed ? toDoSpan.classList.add('completed') : toDoSpan.classList.remove('completed');
+      todo.completed ? toDoLabel.classList.add('completed') : toDoLabel.classList.remove('completed');
       todo.completed ? toggleImgSrc="assets/icons/icons8-checkmark-48.png" : toggleImgSrc="assets/icons/icons8-circle-50.png";
 
       toDoLi.appendChild(this.createToggleButton(toggleImgSrc));
-      toDoLi.appendChild(toDoSpan);
+      toDoLi.appendChild(toDoLabel);
       toDoLi.appendChild(this.createDeleteButton());
       unOrderedToDoList.appendChild(toDoLi);
   })
@@ -89,8 +91,9 @@ const view = {
     return deleteButton
   },
   createToggleButton(src){
-    const toggleButton = document.createElement('img');
-    toggleButton.setAttribute('src',src)
+    const toggleButton = document.createElement('input');
+    toggleButton.setAttribute('type','radio');
+    //toggleButton.setAttribute('src',src)
     toggleButton.classList.add('toggle-button');
     return toggleButton
   },
@@ -106,14 +109,14 @@ const view = {
       }
       
     });
-    todosUl.addEventListener('onchange', (e) => {
+    todosUl.addEventListener('dblclick', (e) => {
       console.log(e.target.textContent)
       if(e.target.className === "toDoLi-text"){
-        console.log(e.target.textContent);
+        console.log(e.target.textContent)
       }
     });
     addTodo.addEventListener('keydown',(e)=>{
-      if(e.code ==='Enter'){
+      if(e.code ==='Enter' && e.target.value !== ""){
         handlers.addTodo();
       }
     });
