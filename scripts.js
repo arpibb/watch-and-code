@@ -69,7 +69,6 @@ const view = {
       toDoLi.id = idx;
 
       let toDoLabel = document.createElement('label');
-      toDoLabel.setAttribute('contenteditable','true')
       toDoLabel.classList.add('toDoLi-text');
       toDoLabel.textContent = todo.todoText;
       
@@ -77,10 +76,10 @@ const view = {
       //if the todo is completed crossing out the text and switching between icons before the text
       todo.completed ? toDoLabel.classList.add('completed') : toDoLabel.classList.remove('completed');
       todo.completed ? toggleImgSrc="assets/icons/icons8-checkmark-48.png" : toggleImgSrc="assets/icons/icons8-circle-50.png";
-
-      toDoLi.appendChild(this.createToggleButton(toggleImgSrc));
-      toDoLi.appendChild(toDoLabel);
-      toDoLi.appendChild(this.createDeleteButton());
+      toDoDiv.appendChild(this.createToggleButton(toggleImgSrc));
+      toDoDiv.appendChild(toDoLabel);
+      toDoDiv.appendChild(this.createDeleteButton());
+      toDoLi.appendChild(toDoDiv)
       unOrderedToDoList.appendChild(toDoLi);
   })
   },
@@ -105,14 +104,16 @@ const view = {
         handlers.deleteTodo(e.target.parentNode.id);
       }
       else if(e.target.className === "toggle-button"){
-        handlers.toggleTodo(e.target.parentNode.id);
+        handlers.toggleTodo(e.target.parentNode.parentNode.id);
       }
       
     });
     todosUl.addEventListener('dblclick', (e) => {
       console.log(e.target.textContent)
+      const editingInput = document.createElement('input');
       if(e.target.className === "toDoLi-text"){
         console.log(e.target.textContent)
+        
       }
     });
     addTodo.addEventListener('keydown',(e)=>{
