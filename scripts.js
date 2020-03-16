@@ -64,6 +64,7 @@ const view = {
     toDoList.todos.map((todo,idx) => {
       let toDoLi = document.createElement('li');
       let toDoDiv = document.createElement('div');
+      toDoDiv.classList.add('toDoDiv');
 
       toDoLi.classList.add('toDoLi');
       toDoLi.id = idx;

@@ -16,6 +16,15 @@
 #addTodo:focus {
   outline: 0;
 }
+.toDoDiv{
+  border: none;
+  background-color: white;
+  width: 20rem;
+  height: 3rem;
+  font-size: 2rem;
+  box-shadow: 1px 5px 40px grey;
+  margin-bottom: 1rem;
+}
 ul{
   list-style-type: none;
   text-align: left;
