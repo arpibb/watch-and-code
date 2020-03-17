@@ -1,17 +1,19 @@
 #wrapper{
-  text-align: center;
   width: 50%;
   margin: auto;
+  box-sizing: border-box;
 }
-
+#toDoApp{
+  box-shadow: 1px 5px 20px grey;
+  width: 21rem;
+}
 #addTodo{
   border: none;
   background-color: white;
-  width: 20rem;
+  width: 21rem;
   height: 3rem;
   font-size: 2rem;
-  box-shadow: 1px 5px 40px grey;
-  margin-bottom: 1rem;
+  padding: 0px;
 }
 #addTodo:focus {
   outline: 0;
@@ -19,15 +21,18 @@
 .toDoDiv{
   border: none;
   background-color: white;
-  width: 20rem;
+  width: 21rem;
   height: 3rem;
   font-size: 2rem;
-  box-shadow: 1px 5px 40px grey;
-  margin-bottom: 1rem;
 }
 ul{
   list-style-type: none;
   text-align: left;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
 }
 .toDoLi{
   border: none;
