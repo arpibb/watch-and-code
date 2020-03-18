@@ -54,6 +54,9 @@ const handlers = {
   },
   toggleAllTodos(){
     toDoList.todoToggleAll();
+  },
+  displayCompletedTodos(){
+    console.log('displaying all');
   }
 };
 
