@@ -52,6 +52,20 @@ ul{
 .completed{
   text-decoration: line-through;
 }
+.display-controls{
+  box-sizing: border-box;
+  padding-bottom: 5px;
+}
 .hidden{
   display: none;
+}
+#item-left{
+  color: grey;
+}
+.controls{
+  border: 1px solid transparent;
+  color: grey;
+}
+.controls:hover{
+  border: 1px solid grey;
 }
