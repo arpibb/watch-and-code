@@ -1,6 +1,7 @@
 const addTodoBox = document.querySelector('#add-todo');
 const deleteButtons = document.querySelector('.deleteButton');
-
+const controls = document.querySelector('.display-controls');
+const itemLeft = document.querySelector('#item-left');
 
 const toDoList = {
   todos: [],
@@ -32,8 +33,6 @@ const toDoList = {
   }
 };
 
-
-
 const handlers = {
   addTodo(){
     let inputText = document.querySelector("#addTodo");
@@ -56,11 +55,13 @@ const handlers = {
   toggleAllTodos(){
     toDoList.todoToggleAll();
   }
-}
+};
+
 const view = {
   displayTodos(){
     let unOrderedToDoList = document.querySelector('#toDoList')
     unOrderedToDoList.innerHTML = "";
+    let notCompletedTodos = 0;
     toDoList.todos.map((todo,idx) => {
       let toDoLi = document.createElement('li');
       let toDoDiv = document.createElement('div');
@@ -76,13 +77,22 @@ const view = {
       let toggleImgSrc = '';
       //if the todo is completed crossing out the text and switching between icons before the text
       todo.completed ? toDoLabel.classList.add('completed') : toDoLabel.classList.remove('completed');
-      todo.completed ? toggleImgSrc="assets/icons/icons8-checkmark-48.png" : toggleImgSrc="assets/icons/icons8-circle-50.png";
+      todo.completed ? notCompletedTodos : notCompletedTodos +=1;
+      //todo.completed ? toggleImgSrc="assets/icons/icons8-checkmark-48.png" : toggleImgSrc="assets/icons/icons8-circle-50.png";
       toDoDiv.appendChild(this.createToggleButton(toggleImgSrc));
       toDoDiv.appendChild(toDoLabel);
       toDoDiv.appendChild(this.createDeleteButton());
       toDoLi.appendChild(toDoDiv)
       unOrderedToDoList.appendChild(toDoLi);
+
   })
+    if(toDoList.todos.length !== 0){
+      controls.classList.remove('hidden');
+      itemLeft.textContent = `${notCompletedTodos} item left`
+    }
+    else{
+      controls.classList.add('hidden');
+    }
   },
   createDeleteButton(){
     const deleteButton = document.createElement('button');

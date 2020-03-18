@@ -10,11 +10,17 @@
   <div id="wrapper">
     <h1>Listy</h1>
     <section id="toDoApp">
-    <button onclick="handlers.toggleAllTodos()">todoToggleAll</button>
+      <button onclick="handlers.toggleAllTodos()">Complete All</button>
     <div>
       <input id="addTodo" type="text" placeholder="Add new todo"/>
       <ul id="toDoList">
       </ul>
+    </div>
+    <div class="display-controls">
+      <span id="item-left" class="controls"></span>
+      <button class="controls" onclick="handlers.displayAllTodos()">All</button>
+      <button class="controls" onclick="handlers.displayActiveTodos()">Active</button>
+      <button class="controls" onclick="handlers.displayCompletedTodos()">Completed</button>
     </div>
     </section>
   </div>
