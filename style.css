@@ -5,15 +5,16 @@
 }
 #toDoApp{
   box-shadow: 1px 5px 20px grey;
-  width: 21rem;
+  width: 27rem;
+  
 }
 #addTodo{
   border: none;
   background-color: white;
-  width: 21rem;
+  width: 23rem;
   height: 3rem;
   font-size: 2rem;
-  padding: 0px;
+  padding-left: 3rem;
 }
 #addTodo:focus {
   outline: 0;
@@ -24,6 +25,7 @@
   width: 21rem;
   height: 3rem;
   font-size: 2rem;
+  overflow:hidden;
 }
 ul{
   list-style-type: none;
@@ -49,6 +51,10 @@ ul{
   height: 1.5rem;
   margin-right: .25rem;
 }
+.delete-button{
+  float:right;
+  margin: .9rem;
+}
 .completed{
   text-decoration: line-through;
 }
@@ -60,6 +66,7 @@ ul{
   display: none;
 }
 #item-left{
+  font-size: .9rem;
   color: grey;
 }
 .controls{

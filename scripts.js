@@ -42,7 +42,7 @@ const handlers = {
   changeTodo(){
     let changeText = document.querySelector("#toDoText");
     let changeTextPos = document.querySelector("#toDoPos");
-    toDoList.changeTodo(changeTextPos.valueAsNumber,changeText.value);
+    toDoList.changeTodo(changeTextPos.valueAsNumber, changeText.value);
     changeText.value = "";
     changeTextPos.value = "";
   },
