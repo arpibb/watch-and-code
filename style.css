@@ -22,10 +22,11 @@
 .toDoDiv{
   border: none;
   background-color: white;
-  width: 21rem;
+  width: 23rem;
   height: 3rem;
   font-size: 2rem;
   overflow:hidden;
+  padding-left: 3rem;
 }
 ul{
   list-style-type: none;
@@ -37,11 +38,12 @@ ul{
   padding-inline-start: 0px;
 }
 .toDoLi{
-  border: none;
+  border-top: 1px solid #d1d1d1;
   background-color: white;
   width: 20rem;
   height: 3rem;
   font-size: 2rem;
+
 }
 .toDoLi-text:focus{
   outline: 0;
@@ -61,13 +63,19 @@ ul{
 .display-controls{
   box-sizing: border-box;
   padding-bottom: 5px;
+  border-top: 1px solid #d1d1d1;
 }
 .hidden{
   display: none;
 }
 #item-left{
   font-size: .9rem;
+  padding-left: .5rem;
   color: grey;
+}
+#controls-div{
+  display: inline-block;
+  margin-left: 17%;
 }
 .controls{
   border: 1px solid transparent;
