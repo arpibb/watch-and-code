@@ -2,6 +2,7 @@ const addTodoBox = document.querySelector('#add-todo');
 const deleteButtons = document.querySelector('.deleteButton');
 const controls = document.querySelector('.display-controls');
 const itemLeft = document.querySelector('#item-left');
+const toggleAllBtn = document.querySelector('#toggle-all-btn');
 
 const toDoList = {
   todos: [],
@@ -91,21 +92,24 @@ const view = {
   })
     if(toDoList.todos.length !== 0){
       controls.classList.remove('hidden');
-      itemLeft.textContent = `${notCompletedTodos} item left`
+      toggleAllBtn.classList.remove('hidden');
+      toggleAllBtn.classList.add('visible-inline');
+      itemLeft.textContent = `${notCompletedTodos} item left`;
     }
     else{
       controls.classList.add('hidden');
+      toggleAllBtn.classList.add('hidden')
     }
   },
   createDeleteButton(){
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
+    deleteButton.textContent = 'X';
     deleteButton.classList.add('delete-button');
     return deleteButton
   },
   createToggleButton(src){
     const toggleButton = document.createElement('input');
-    toggleButton.setAttribute('type','radio');
+    toggleButton.setAttribute('type','checkbox');
     //toggleButton.setAttribute('src',src)
     toggleButton.classList.add('toggle-button');
     return toggleButton

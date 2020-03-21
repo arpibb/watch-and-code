@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/v4-shims.css">
   <link rel="stylesheet" type="text/css" href="style.css">
   <title>Listy</title>
 </head>
@@ -10,9 +12,11 @@
   <div id="wrapper">
     <h1>Listy</h1>
     <section id="toDoApp">
-      <button onclick="handlers.toggleAllTodos()">Complete All</button>
-    <div>
-      <input id="addTodo" type="text" placeholder="Add new todo"/>
+    <div style="box-sizing: border-box;">
+      <div>
+        <label onclick="handlers.toggleAllTodos()" id="toggle-all-btn" class="hidden"><i class="fas fa-chevron-down iconMod"></i></label>
+        <input id="addTodo" type="text" placeholder="Add new todo"/>
+      </div>
       <ul id="toDoList">
       </ul>
     </div>
