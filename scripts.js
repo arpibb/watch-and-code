@@ -56,17 +56,33 @@ const handlers = {
   toggleAllTodos(){
     toDoList.todoToggleAll();
   },
+  displayAllTodos(){
+    view.displayTodos()
+  },
+  displayActiveTodos(){
+    view.displayTodos(true,false)
+  },
   displayCompletedTodos(){
-    console.log('displaying all');
+    view.displayTodos(false,true)
   }
 };
 
 const view = {
-  displayTodos(){
+  displayTodos(active=false,completed=false){
     let unOrderedToDoList = document.querySelector('#toDoList')
     unOrderedToDoList.innerHTML = "";
     let notCompletedTodos = 0;
-    toDoList.todos.map((todo,idx) => {
+    toDoList.todos.filter(todo => {
+      if(active){
+        return !todo.completed
+      }
+      else if(completed){
+        return todo.completed
+      }
+      else{
+        return todo
+      }
+    }).map((todo,idx) => {
       let toDoLi = document.createElement('li');
       let toDoDiv = document.createElement('div');
       toDoDiv.classList.add('toDoDiv');
