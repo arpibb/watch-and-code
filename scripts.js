@@ -64,6 +64,10 @@ const handlers = {
   },
   displayCompletedTodos(){
     view.displayTodos(false,true)
+  },
+  deleteAllTodos(){
+    toDoList.todos = [];
+    view.displayTodos();
   }
 };
 
